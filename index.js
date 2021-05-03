@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 
 const app = express()
 const port = 5000
+app.use(express.json())
 app.use("/", require("./routes/index"));
 app.use(express.static('public'))
 app.use('/css', express.static(__dirname + 'public/css'))
