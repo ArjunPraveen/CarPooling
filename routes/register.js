@@ -27,6 +27,12 @@ exp.signup = ([
             return res.status(400).json({ errors: errors.array() });
         }
         let {name,email,password} = req.body
+        let existing = await User.find({email})
+        console.log(existing)
+        if(existing.length){
+            console.log('User already exists')
+            return res.send({success:false, msg: 'User already exists'})
+        }
         let id_obj = await User.find({}, { userID: 1, _id: 0 })
             .sort({ userID: -1 })
             .limit(1);
@@ -44,9 +50,10 @@ exp.signup = ([
         })
 
         await newUser.save();
+        console.log('User registered')
         return res.send({
             success: true,
-            msg: 'Registered.',
+            msg: 'Registered Successfully!',
           });
 
     } catch (err) {
