@@ -101,7 +101,7 @@ exp.logout = async(req,res)=>{
         res.clearCookie('token');
         return res.redirect('/')
     } catch (err) {
-        
+        console.log(err)
     }
 }
 

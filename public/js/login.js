@@ -6,6 +6,10 @@ loginButton.addEventListener('click', async (e)=>{
     e.preventDefault()
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
+    if(!email || !password ){
+        alert("Please fill in all fields!")
+        return;
+    }
     try{
     await fetch('/api/login', {
         method: 'POST',
@@ -41,7 +45,17 @@ registerButton.addEventListener('click', async (e)=>{
     const name = document.getElementById('signupName').value
     const email = document.getElementById('signupEmail').value
     const password = document.getElementById('signupPassword').value
-    console.log(name, email)
+    const repassword = document.getElementById('rePassword').value
+  
+    if(!email || !name || !password || !repassword){
+        alert("Please fill in all fields!")
+        return;
+    }
+    if(password!=repassword){
+        alert("Passwords dont match.")
+        return
+    }
+    //add more checks
     
     await fetch('/api/signup', {
         method: 'POST',
