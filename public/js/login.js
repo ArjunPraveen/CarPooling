@@ -1,10 +1,36 @@
 const loginButton = document.getElementById('loginButton')
 const signupButton = document.getElementById('signupButton')
 
-loginButton.addEventListener('click', ()=>{
+loginButton.addEventListener('click', async (e)=>{
+    e.preventDefault()
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
-    
+    try{
+    await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body : JSON.stringify({
+            email, password
+        })
+    }).then((res)=>{
+        check = res.json()
+        return check
+    }).then((check)=> {
+        if(check.success){
+            window.location.replace('/profile')
+        }else{
+            alert(check.msg)
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+}catch(err){
+        console.log(err)
+    }
 
 })
 
@@ -23,8 +49,14 @@ signupButton.addEventListener('click', async ()=>{
             name, email, password
         })
     }).then((res) => {
-        hello = res.json()
-        console.log(hello)
+        check = res.json()
+        console.log(check)
         //return res.json()
+    }).then((check)=>{
+        if(check.success){
+            window.location.replace('/profile')
+        }else{
+            console.log('check variable error')
+        }
     })
 })  

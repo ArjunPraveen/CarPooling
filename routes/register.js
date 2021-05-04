@@ -58,25 +58,44 @@ exp.signup = ([
 exp.login = async(req,res)=>{
     try {
         const {email, password} = req.body
+        console.log(email)
         const user = await User.findOne({email}).lean()
         
         if(!user){
+            console.log('User not found')
             return res.send({success: false, msg: 'Invalid Credentials'})
+        }else{
+            console.log('User found')
         }
 
         if(await bcrypt.compare(password, user.password)){
+            console.log('Password matched')
             const token = jwt.sign({
+                name: user.name,
                 email: user.email,
                 userID:user.userID 
             },process.env.JWT_secret)
-            return res.body({success: true, data:token})
+
+            res.cookie('token', token)
+            return res.send({success: true, data:token})
+        }else{
+            console.log('Password incorrect')
+            return res.send({success: false, msg: "Invalid credentials"})
         }
 
+    } catch (err) {
+        console.log(err)
+        return res.send({success: false, msg: "check console"})
+    }
+}
 
+exp.logout = async(req,res)=>{
+    try {
+        res.clearCookie('token');
+        return res.redirect('/')
     } catch (err) {
         
     }
 }
-
 
 module.exports = exp
