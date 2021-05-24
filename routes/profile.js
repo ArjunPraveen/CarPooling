@@ -2,10 +2,10 @@ const User = require('../models/User')
 let exp = {};
 
 exp.editProfile = async()=>{
-
+    
 }
 
-exp.fillForm = async()=> {
+exp.requestRide = async()=> {
     
 }
 
