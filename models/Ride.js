@@ -29,7 +29,12 @@ const RideSchema = new mongoose.Schema({
     },
 
     bookingDate: {
-        type:Date
+        type:Date,
+        default : Date.now()
+    },
+
+    travelDate: {
+        type: Date,
     },
 
     bookingConfirmation: {
