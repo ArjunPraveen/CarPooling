@@ -38,11 +38,16 @@ const RideSchema = new mongoose.Schema({
     },
 
     users: [Number],
-    
+
     modeOfTransport: {
         type: String,
         enum: ['Sedan', 'Hatchback', 'SUV', 'Premium'],
         default: 'Sedan'
+    },
+
+    pending : {
+        type: Boolean,
+        defualt: false
     }
 })
 

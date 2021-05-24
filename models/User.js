@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    rides: [Number]
 })
 
 module.exports = User = mongoose.model('User', UserSchema);
