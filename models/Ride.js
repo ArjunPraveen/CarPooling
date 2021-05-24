@@ -34,7 +34,7 @@ const RideSchema = new mongoose.Schema({
 
     bookingConfirmation: {
         type:Boolean,
-        default:False
+        default:false
     },
 
     users: [Number],
