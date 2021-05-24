@@ -26,7 +26,7 @@ exp.signup = ([
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        let {name,email,password} = req.body
+        let {name,email,mobileNumber, password} = req.body
         let existing = await User.find({email})
         console.log(existing)
         if(existing.length){
@@ -36,7 +36,7 @@ exp.signup = ([
         let id_obj = await User.find({}, { userID: 1, _id: 0 })
             .sort({ userID: -1 })
             .limit(1);
-        let userID = 5000;
+        let userID = 500000;
         if (id_obj[0]) {
           userID = id_obj[0].userID + 1;
         }
@@ -46,6 +46,7 @@ exp.signup = ([
             userID,
             name,
             email,
+            mobileNumber,
             password,
         })
 
