@@ -10,7 +10,7 @@ module.exports = (req,res,next) => {
             return res.send({success: false, msg: 'Authorization denied'})
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        //console.log(decoded)
+        console.log("hello",decoded)
         req.token = decoded
         next()
     } catch (err) {
