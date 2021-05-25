@@ -14,7 +14,11 @@ module.exports = (req,res,next) => {
         req.token = decoded
         next()
     } catch (err) {
-        console.log(err)
+        console.log(err.name)
+        if(err.name == 'TokenExpiredError'){
+            return res.send({success:false, msg: "Your login session has expired, please login again"})
+            //send to profile frontend for alert
+        }
         return res.send({success: false, msg:"check auth middleware"})
     }
     
