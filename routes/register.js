@@ -82,7 +82,9 @@ exp.login = async(req,res)=>{
                 name: user.name,
                 email: user.email,
                 userID:user.userID 
-            },process.env.JWT_secret)
+            },process.env.JWT_secret, {
+                expiresIn: "1200s"
+            })
 
             res.cookie('token', token)
             return res.send({success: true, data:token})
