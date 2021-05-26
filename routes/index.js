@@ -1,6 +1,8 @@
 const express = require("express");
 const register = require('./register')
 const profile = require('./profile')
+const User = require('../models/User')
+const Ride = require('../models/Ride')
 const ride = require('./ride')
 const auth = require('../middleware/auth')
 const router = express.Router();
@@ -11,8 +13,9 @@ router.get('/', (req,res)=> {
 })
 
 
-router.get('/profile', auth, (req,res)=> {
-    res.render('profile', {token : req.token})
+router.get('/profile', auth, async (req,res)=> {
+    const user = await User.findOne({email: req.token.email})   
+    res.render('profile', {token : req.token, user:user})
 })
 
 router.get('/newride', auth, (req,res)=> {

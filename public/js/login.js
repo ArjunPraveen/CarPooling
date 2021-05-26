@@ -46,7 +46,7 @@ registerButton.addEventListener('click', async (e)=>{
     const email = document.getElementById('signupEmail').value
     const password = document.getElementById('signupPassword').value
     const repassword = document.getElementById('rePassword').value
-  
+    const mobileNumber =document.getElementById('mobile').value
     if(!email || !name || !password || !repassword){
         alert("Please fill in all fields!")
         return;
@@ -65,7 +65,7 @@ registerButton.addEventListener('click', async (e)=>{
         },
         credentials: "include",
         body : JSON.stringify({
-            name, email, password
+            name, email, password, mobileNumber
         })
     }).then((res) => {
         check = res.json()

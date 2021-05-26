@@ -10,6 +10,8 @@ exp.requestRide = async(req,res)=> {
         modeOfTransport} = req.body
 
         travelDate=Date.now() //for now
+        // convert date here
+
 
         const userID = req.token['userID']
         const user = await User.findOne({userID: userID})
@@ -65,11 +67,22 @@ exp.requestRide = async(req,res)=> {
 }
 
 exp.joinExistingRide = async(req,res) => {
+    try {
+        const {rideID} = req.body
+        const findRide = await Ride.findOne({rideID})
+        if(!findRide){
+            return res.send({success:false, msg: 'Ride is not available or has already been confirmed!'})
+        }
+        await Ride.updateOne({rideID}, {$set: {}})
 
+
+    } catch (err) {
+        
+    }
 }
 
 exp.viewRides = async(req,res) => {
-
+    
 }
 
 exp.editRide = async(req,res) => {
