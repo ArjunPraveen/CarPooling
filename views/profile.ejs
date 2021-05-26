@@ -1,15 +1,125 @@
+<!--<%= token.name%>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/register.css" />
+    <link rel="stylesheet" type="text/css" href="/css/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <title>Document</title>
 </head>
 <body>
-    <a href="/api/logout"style="position: absolute;right:10px; top:10px" >Logout</a>
-    <br>
-    <h1>Welcome <%= token.name%></h1>
+    <h2 >Dashboard</h2>
+    <div id="main">
+        <div class="wrapper">
+            <div class="container">
+                <!-- //////////////////////////////////////////////////////////////////////////// -->
+                <div id="work-collections">
+                  <div class="row">
+                    <div class="col s12 m6 l5">
+                      <div id="profile-card" class="card">
+
+                        <div class="card-content">
+                          
+                          
+        
+                          <span class="card-title activator grey-text text-darken-4"><%= user.name%></span>
+                          <div class="col s3"></div>
+                            <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                          
+                          <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"><%=user.mobileNumber%></i></p>
+                          <p><i class="mdi-communication-email cyan-text text-darken-2"><%=user.email%></i> </p>
+                          <p>Total Rides: <i class="mdi-action-perm-identity cyan-text text-darken-4"><%=user.rides.length%></i></p>
+                          <a class="waves-effect waves-light btn">EDIT</a>
+                        </div>
+                        
+                      </div>
+                    </div>
+        
+                    <div class="col s12 m12 l7">
+                      <ul id="projects-collection" class="collection">
+                        <li class="collection-item avatar">
+                          <i class="mdi-file-folder circle light-blue darken-2"></i>
+                          <span class="collection-header">Field1 (name)</span>
+                          <p>Your Favorites</p>
+                          <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                        </li>
+                        <li class="collection-item">
+                          <div class="row">
+                            <div class="col s6">
+                              <p class="collections-title">Web App</p>
+                              <p class="collections-content">AEC Company</p>
+                            </div>
+                            <div class="col s3">
+                              <span class="task-cat cyan">Development</span>
+                            </div>
+                            <div class="col s3">
+                              <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="collection-item">
+                          <div class="row">
+                            <div class="col s6">
+                              <p class="collections-title">Mobile App for Social</p>
+                              <p class="collections-content">iSocial App</p>
+                            </div>
+                            <div class="col s3">
+                              <span class="task-cat grey darken-3">UI/UX</span>
+                            </div>
+                            <div class="col s3">
+                              <div id="project-line-2"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="collection-item">
+                          <div class="row">
+                            <div class="col s6">
+                              <p class="collections-title">Website</p>
+                              <p class="collections-content">MediTab</p>
+                            </div>
+                            <div class="col s3">
+                              <span class="task-cat teal">Marketing</span>
+                            </div>
+                            <div class="col s3">
+                              <div id="project-line-3"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="collection-item">
+                          <div class="row">
+                            <div class="col s6">
+                              <p class="collections-title">AdWord campaign</p>
+                              <p class="collections-content">True Line</p>
+                            </div>
+                            <div class="col s3">
+                              <span class="task-cat green">SEO</span>
+                            </div>
+                            <div class="col s3">
+                              <div id="project-line-4"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+        
+                  </div>
+                </div>
+                <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <a class="btn-floating btn-large red">
+                      +
+                    </a>
+                    
+                  </div>
+        </div>
+        
+    </div>
+    
+  
 </body>
 </html>
