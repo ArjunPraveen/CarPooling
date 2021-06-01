@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/profile.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -35,9 +35,38 @@
                           <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"><%=user.mobileNumber%></i></p>
                           <p><i class="mdi-communication-email cyan-text text-darken-2"><%=user.email%></i> </p>
                           <p>Total Rides: <i class="mdi-action-perm-identity cyan-text text-darken-4"><%=user.rides.length%></i></p>
-                          <a class="waves-effect waves-light btn">EDIT</a>
+                          <a class="waves-effect waves-light btn" id="edit" href="#modal1">EDIT</a>
                         </div>
-                        
+                        <!-- Modal Structure -->
+                          <div id="modal1" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                              <h4>Edit Details</h4>
+                              <div class="col s6">
+                                <form class="">
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input id="Name" type="text" class="validate">
+                                      <label for="Name">New name</label>
+                                    </div>
+                                      <div class="input-field col s12">
+                                        <input id="Email" type="email" class="validate">
+                                        <label for="Email">New Email</label>
+                                      </div>
+                                      <div class="input-field col s12">
+                                        <input id="MobileNumber" type="text" class="validate">
+                                        <label for="Mobile Number">New mobile number</label>
+                                      </div>
+                                      <div class="input-field col s12">
+                                        <button type="submit" id="editButton" class="waves-effect waves-light btn">Update</button>
+                                      </div>  
+                                  </div>	
+                                  </form>
+                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                            </div>
+                          </div>
                       </div>
                     </div>
         
@@ -122,4 +151,5 @@
     
   
 </body>
+<script type="text/javascript" src="js/modal.js"></script>
 </html>
