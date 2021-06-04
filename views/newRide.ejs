@@ -4,14 +4,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/profile.css" /> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>New Ride</title>
+    
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div id="tabsswitch" class = "col s12 l6 offset-l3">
+                <ul class = "tabs">
+                   <li class = "tab col s6"><a href = "#booked">Booked</a></li>
+                   <li class = "tab col s6"><a class = "active" href ="#new">
+                      New Form</a></li>
+                   
+                </ul>
+             </div>
+            <div id="new" class="col s12 l6 offset-l3 white-text card hoverable">
+                <div class="col s12 center">
+                    <h1 class="text-center teal-text light"><small>Enter ride details </small></h1>
+                </div>
+                <div class="divider"></div>  
+                    <div class="input-field col s12">
+                    <i class="material-icons prefix orange-text">my_location</i>
+                    <input id="pickup" name="name" type="text" class="teal-text">
+                    <label for="pickup">Pickup Location</label>
+                    </div>
+                    <div class="input-field col s12">
+                    <i class="material-icons prefix green-text">place</i>
+                    <input id="destination" name="name" type="text" class="teal-text">
+                    <label for="destination">Destination Location</label>
+                    </div>
+                    <div class="divider"></div> 
+                    <div class="col s12">&nbsp;</div>
+                    
+                      <div class="row">
+                        <div class="col s12">
+                          <div class="col s4 teal-text">
+                            <div class="left">
+                              <big><i class="material-icons small purple-text">directions_car</i></big>
+                            </div>
+                            <div class="left"> &nbsp; &nbsp;Transport</div>
+                          </div>
+                          <div class="col s8 center teal-text">
+                            <div class="input-field col s12">
+                                <select  id="mode" class="teal-text">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Sedan</option>
+                                    <option value="2">SUV</option>
+                                    <option value="3">Hatchback</option>
+                                    <option value="3">Premium</option>
+                                </select>
+                                <label>Type of vehicle</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
+                    <div class="input-field col s12">
+                        <label for="traveldate" class="">Travel Date</label>
+                        <input id="traveldate" type="text" class="datepicker black-text">
+                    </div>
+
+                    <div class="input-field col s12">
+                        <label for="traveltime">Travel Time</label>
+                        <input id="traveltime" class="timepicker black-text" type="text">
+                    </div>
+
+                    <div class="col s12">&nbsp;</div>
+                    <div class="col s6 center">
+                        <button id="submit" type="Submit" class="col s6 btn red hoverable">Submit</button>
+                    </div>
+                <div class="col s12">&nbsp;</div>
+            </div>
+
+            <!-- show different rides-->
+
+            <div id= "booked" class="col s12 l6 offset-l3 white-text card hoverable">
+                <div class="col s12 center">
+                <h1 class="text-center teal-text light"><small>Materialize Form</small></h1>
+                  </div>
+                <div class="divider"></div>  
+                <div class="input-field col s12">
+                  <i class="material-icons prefix teal-text">person</i>
+                  <input id="full-name" name="name" type="text" class="teal-text">
+                  <label for="full-name">Full Name</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix teal-text">email</i>
+                  <input id="email" name="name" type="text" class="teal-text">
+                  <label for="email">Email</label>
+                </div>
+                
+                <div class="row">
+                  <div class="col s12">
+                    <div class="col s4 teal-text gender">
+                      <div class="left">
+                        <big><i class="material-icons small">wc</i></big>
+                      </div>
+                      <duv class="left"> &nbsp; &nbsp; Gender</duv>
+                    </div>
+                    <div class="col s4 center">
+                      <input id="male" name="gender" checked="checked" class="with-gap" type="radio">
+                      <label for="male">Male</label>
+                    </div>
+                    <div class="col s4 center">
+                      <input id="female" name="gender" class="with-gap" type="radio">
+                      <label for="female">Female</label>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col s12 center">
+                <button type="Submit" class="col s12 btn red hoverable">Submit</button>
+                  </div>
+                <div class="col s12">&nbsp;</div>
+              </div>
+        </div>
+    </div>
     
     <!-- testing -->
     <!-- --------------------------------------------------------------------------------------------- -->
-    <p>Pickup: </p>
+    <!-- <p>Pickup: </p>
     <input type="text" id="pickup">
     <p>Destination</p>
     <input type="text" id="destination">
@@ -19,7 +137,7 @@
     <input type="text" id="bookingDate">
     <p>Mode of Transport</p>
     <input type="text" id="mode">
-    <button id="submit">Submit</button>
+    <button id="submit">Submit</button> -->
     <!-- --------------------------------------------------------------------------------------------- -->
     <!-- testing done - comment after testing-->
 </body>
