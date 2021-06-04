@@ -30,7 +30,7 @@ const RideSchema = new mongoose.Schema({
 
     bookingDate: {
         type:Date,
-        default : Date.now()
+        default : Date.now
     },
 
     travelDate: {

@@ -13,9 +13,10 @@ router.get('/', (req,res)=> {
 })
 
 
-router.get('/profile', auth, async (req,res)=> {
-    const user = await User.findOne({email: req.token.email})   
-    res.render('profile', {token : req.token, user:user})
+router.get('/profile', auth, profile.viewRides, async (req,res)=> {
+    //const user = await User.findOne({email: req.token.email})   
+    //console.log(req.rides)
+    res.render('profile', {token : req.token, user:req.user, rides: req.rides})
 })
 
 router.get('/newride', auth, (req,res)=> {

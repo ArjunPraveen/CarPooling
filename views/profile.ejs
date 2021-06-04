@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/profile.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -73,68 +73,41 @@
                     <div class="col s12 m12 l7">
                       <ul id="projects-collection" class="collection">
                         <li class="collection-item avatar">
-                          <i class="mdi-file-folder circle light-blue darken-2"></i>
+                          <i class="mdi-file-folder circle light-blue darken-2">
+                            <div class="center-align">  <!--fix this-->
+                              <i class="material-icons">commute</i>
+                            </div>
+                            
+                          </i>
                           <span class="collection-header">Rides</span>
                           <p>History</p>
                           <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                         </li>
-                        <li class="collection-item">
+                        <% let colours = {"Sedan" : "cyan", "SUV": "green", "Hatchback": "blue", "Premium": "orange"} %>
+                        <% var d = new Date()%>
+                        <% console.log("hello",rides[2].travelDate.getTime()<d.getTime( ), rides[2].travelDate.getTime()>d.getTime()) %>
+                        <% for(let i=0; i<rides.length; i++){ %>
+                        
+                        <% if(rides[i].travelDate.getTime()<Date.now()){ %>
+                        <li class="collection-item grey lighten-4">
+                          <%}else{%>
+                            <li class="collection-item">
+                          <%}%>
                           <div class="row">
                             <div class="col s6">
-                              <p class="collections-title">Airport</p>
-                              <p class="collections-content">AEC Company</p>
+                              <p class="collections-title"><%=rides[i].pickupPoint%></p>
+                              <p class="collections-content"><%=rides[i].destination%></p>
                             </div>
                             <div class="col s3">
-                              <span class="task-cat cyan">Development</span>
+                              <span class="task-cat <%=colours[rides[i].modeOfTransport]%>"><%=rides[i].modeOfTransport%></span>
                             </div>
                             <div class="col s3">
                               <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
                             </div>
                           </div>
                         </li>
-                        <li class="collection-item">
-                          <div class="row">
-                            <div class="col s6">
-                              <p class="collections-title">Pabbas Ice cream</p>
-                              <p class="collections-content">iSocial App</p>
-                            </div>
-                            <div class="col s3">
-                              <span class="task-cat grey darken-3">UI/UX</span>
-                            </div>
-                            <div class="col s3">
-                              <div id="project-line-2"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="collection-item">
-                          <div class="row">
-                            <div class="col s6">
-                              <p class="collections-title">MTR restaurant</p>
-                              <p class="collections-content">MediTab</p>
-                            </div>
-                            <div class="col s3">
-                              <span class="task-cat teal">Marketing</span>
-                            </div>
-                            <div class="col s3">
-                              <div id="project-line-3"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="collection-item">
-                          <div class="row">
-                            <div class="col s6">
-                              <p class="collections-title">Airport</p>
-                              <p class="collections-content">True Line</p>
-                            </div>
-                            <div class="col s3">
-                              <span class="task-cat green">SEO</span>
-                            </div>
-                            <div class="col s3">
-                              <div id="project-line-4"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
+                        <%}%>
+      
                     </div>
         
                   </div>

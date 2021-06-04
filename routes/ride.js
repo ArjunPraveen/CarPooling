@@ -9,9 +9,9 @@ exp.requestRide = async(req,res)=> {
         travelDate, 
         modeOfTransport} = req.body
 
-        //travelDate=Date.now() 
+        //bookingDate=Date.now() 
         // convert date here
-        
+            
                 
         const userID = req.token['userID']
         const user = await User.findOne({userID: userID})

@@ -1,6 +1,5 @@
 const User = require('../models/User')
 const Ride = require('../models/Ride');
-const { response } = require('express');
 let exp = {};
 
 exp.editProfile = async(req,res)=>{
@@ -32,8 +31,26 @@ exp.editProfile = async(req,res)=>{
 
 }
 
-exp.viewProfile = async(req,res)=> {
-
+exp.viewRides = async(req,res,next)=> {
+    try {
+        const user = await User.findOne({email: req.token.email})
+        if(!user){
+            return res.send({success: false, msg:"User not found, Internal Server error"})
+        }
+        req.user = user
+        const allrides = await Ride.find({rideInitiator: req.token.userID})
+        const rides = []
+        allrides.forEach((ride) => {
+            rides.push(ride)
+        });
+        //console.log(rides)
+        req.rides = rides
+        next()
+    } catch (err) {
+        console.log(err)
+        return res.send({success:false, msg: "Internal Server Error"})
+    }
+    
 }
 
 

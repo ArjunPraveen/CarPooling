@@ -37,8 +37,8 @@ submit.addEventListener('click', async(e)=> {
     const destination = document.getElementById('destination').value
     var selectoptions = document.getElementById("mode");
     const modeOfTransport = selectoptions.options[selectoptions.selectedIndex].text;
-    const bookingDate = new Date(document.getElementById('traveldate').value)    
-    console.log(pickupPoint,destination,bookingDate , modeOfTransport)
+    const travelDate = new Date(document.getElementById('traveldate').value)    
+    console.log(pickupPoint,destination,travelDate , modeOfTransport)
     await fetch('/api/newRide', {
         method: 'POST',
         headers: {
@@ -47,7 +47,7 @@ submit.addEventListener('click', async(e)=> {
         },
         credentials: "include",
         body : JSON.stringify({
-            pickupPoint, destination, bookingDate, modeOfTransport
+            pickupPoint, destination, travelDate, modeOfTransport
         })
     }).then((res) => {
         check = res.json()
