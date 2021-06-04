@@ -34,7 +34,7 @@
                           
                           <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"><%=user.mobileNumber%></i></p>
                           <p><i class="mdi-communication-email cyan-text text-darken-2"><%=user.email%></i> </p>
-                          <p>Total Rides: <i class="mdi-action-perm-identity cyan-text text-darken-4"><%=user.rides.length%></i></p>
+                          <p>Total Rides: <i class="mdi-action-perm-identity cyan-text text-darken-4"><%=rides.length%></i></p>
                           <a class="waves-effect waves-light btn" id="edit" href="#modal1">EDIT</a>
                         </div>
                         <!-- Modal Structure -->
@@ -85,7 +85,7 @@
                         </li>
                         <% let colours = {"Sedan" : "cyan", "SUV": "green", "Hatchback": "blue", "Premium": "orange"} %>
                         <% var d = new Date()%>
-                        <% console.log("hello",rides[2].travelDate.getTime()<d.getTime( ), rides[2].travelDate.getTime()>d.getTime()) %>
+                        <%if(rides.length!=0){%>
                         <% for(let i=0; i<rides.length; i++){ %>
                         
                         <% if(rides[i].travelDate.getTime()<Date.now()){ %>
@@ -107,7 +107,21 @@
                           </div>
                         </li>
                         <%}%>
-      
+                        <%}else{%>
+                          <li class="collection-item red  lighten-4">
+                            <div class="row">
+                              <div class="col s6">
+                                <p class="collections-title">No rides yet</p>
+                               
+                              </div>
+                              
+                              <div class="col s3">
+                                <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
+                              </div>
+                            </div>
+                          </li>  
+                          
+                          <%}%>
                     </div>
         
                   </div>
