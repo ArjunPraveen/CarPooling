@@ -57,6 +57,7 @@ submit.addEventListener('click', async(e)=> {
         console.log(check.success)
         if(check.success){
             alert(check.msg)
+            document.location.href = '/profile',true;
         }else{
             alert(check.msg)
         }
