@@ -67,7 +67,13 @@ exp.login = async(req,res)=>{
     try {
         const {email, password} = req.body
         console.log(email)
-        const user = await User.findOne({email}).lean()
+        var user
+        if(email.includes('@')){
+            user = await User.findOne({email}).lean()
+        }else{
+            mobileNumber = email
+            user = await User.findOne({mobileNumber}).lean()
+        }
         
         if(!user){
             console.log('User not found')
