@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         defaultDate: new Date(Date.now()),
         setDefaultDate: true
       };
-    var elems1 = document.querySelector('.datepicker');
+    var elems1 = document.querySelector('#traveldate');
     var instance = M.Datepicker.init(elems1, options);
 
     var elems2 = document.querySelectorAll('select');
@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
     var elems3 = document.querySelectorAll('.timepicker');
     var instances = M.FormSelect.init(elems3, {});
+
+    var elems4 = document.querySelector('#filterdate');
+    var instance = M.Datepicker.init(elems4, {});
 
 })
 
@@ -98,4 +101,22 @@ addRide.forEach(ride => {ride.addEventListener('click' , async(e)=> {
       }
     
 })
+})
+
+var filterButton = document.getElementById('filter')
+filterButton.addEventListener('click', ()=>{
+    try {
+        const dateString = document.getElementById('filterdate').value
+        console.log(typeof(dateString))
+        if(dateString === "" || dateString == undefined){
+            window.location.replace('/newride')
+            console.log("yo")
+        }else{
+            const filterDate = new Date(dateString)
+            console.log(dateString)
+            window.location.replace(`/filtered?date=${filterDate}`);
+        }
+    } catch (err) {
+        
+    }
 })

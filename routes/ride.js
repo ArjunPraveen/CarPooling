@@ -129,6 +129,37 @@ exp.viewRides = async(req,res,next) => {
     }
 }
 
+exp.filterRide = async(req,res) => {
+    const { date } = req.query;
+    console.log('hello', date)
+    console.log(new Date(date))
+    var lowerDate = new Date(date)
+    lowerDate.setDate(lowerDate.getDate() -1)
+    var higherDate = new Date(date)
+    higherDate.setDate(higherDate.getDate() );
+    console.log(higherDate,lowerDate)
+    var allrides = await Ride.find({"travelDate" : {"$gte": lowerDate, "$lt": higherDate}})
+        const rides = []
+        var users = {}
+        for(let i=0; i<allrides.length; i++){
+            temp = {}
+            if(req.token.userID == allrides[i].rideInitiator){
+                continue
+            }
+
+            if(allrides[i].rideInitiator in users){
+                allrides[i].initiatorName = user.rideInitiator
+            }else{
+                var curUser = await User.findOne({userID: allrides[i].rideInitiator})
+                users.rideInitiator = curUser.name
+                allrides[i].initiatorName = curUser.name
+            }
+            // allrides[i].travelDate = allrides[i].travelDate
+            rides.push(allrides[i])
+        };
+    res.render('newRide', {token : req.token, rides : rides})
+}
+
 exp.editRide = async(req,res) => {
 
 }

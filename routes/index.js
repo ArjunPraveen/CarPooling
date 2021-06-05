@@ -14,8 +14,6 @@ router.get('/', (req,res)=> {
 
 
 router.get('/profile', auth, profile.viewRides, async (req,res)=> {
-    //const user = await User.findOne({email: req.token.email})   
-    //console.log(req.rides)
     res.render('profile', {token : req.token, user:req.user, rides: req.rides})
 })
 
@@ -23,6 +21,7 @@ router.get('/newride', auth, ride.viewRides, (req,res)=> {
     res.render('newRide', {token : req.token, rides : req.rides})
 })
 
+router.get('/filtered', auth, ride.filterRide)
 //login and register routes
 router.post("/api/signup", register.signup)
 router.post("/api/login", register.login)
