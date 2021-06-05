@@ -71,7 +71,7 @@ addRide.forEach(ride => {ride.addEventListener('click' , async(e)=> {
     const rideID = e.target.parentNode.getAttribute("id")
     if (confirm(`Are you sure you want to join ${rideID}? `)) {
         await fetch('/api/joinride', {
-            method: 'POST',
+            method: 'POST' ,
             headers: {
                 'Accept': 'application/json',
                 "Content-Type": "application/json"
