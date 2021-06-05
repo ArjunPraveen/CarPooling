@@ -19,8 +19,8 @@ router.get('/profile', auth, profile.viewRides, async (req,res)=> {
     res.render('profile', {token : req.token, user:req.user, rides: req.rides})
 })
 
-router.get('/newride', auth, (req,res)=> {
-    res.render('newRide', {token : req.token})
+router.get('/newride', auth, ride.viewRides, (req,res)=> {
+    res.render('newRide', {token : req.token, rides : req.rides})
 })
 
 //login and register routes
@@ -33,5 +33,8 @@ router.get("/api/logout", register.logout)
 router.post('/api/newRide', auth, ride.requestRide)
 router.post('/api/editprofile', auth, profile.editProfile)
 // router.post('/api/fillform', auth, profile.fillForm)
+
+//ride routes
+router.post('/api/joinride', auth, ride.joinExistingRide)
 
 module.exports = router;

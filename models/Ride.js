@@ -36,6 +36,10 @@ const RideSchema = new mongoose.Schema({
     travelDate: {
         type: Date,
     },
+    
+    numberofPeople : {
+        type:Number
+    },
 
     bookingConfirmation: {
         type:Boolean,

@@ -35,6 +35,7 @@ submit.addEventListener('click', async(e)=> {
     e.preventDefault()
     const pickupPoint = document.getElementById('pickup').value
     const destination = document.getElementById('destination').value
+    const numberOfPeople = document.getElementById('numberOfPeople').value
     var selectoptions = document.getElementById("mode");
     const modeOfTransport = selectoptions.options[selectoptions.selectedIndex].text;
     const travelDate = new Date(document.getElementById('traveldate').value)    
@@ -47,7 +48,7 @@ submit.addEventListener('click', async(e)=> {
         },
         credentials: "include",
         body : JSON.stringify({
-            pickupPoint, destination, travelDate, modeOfTransport
+            pickupPoint, destination, travelDate, modeOfTransport, numberOfPeople
         })
     }).then((res) => {
         check = res.json()
@@ -62,4 +63,37 @@ submit.addEventListener('click', async(e)=> {
             alert(check.msg)
         }
     })
+})
+
+var addRide = document.querySelector('a[name="addRide"]')
+addRide.addEventListener('click' , async(e)=> {
+    const rideID = e.target.parentNode.getAttribute("id")
+    if (confirm(`Are you sure you want to join ${rideID}? `)) {
+        await fetch('/api/joinride', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body : JSON.stringify({
+                rideID
+            })
+        }).then((res) => {
+            check = res.json()
+            console.log(check)
+            return check
+        }).then((check)=>{
+            console.log(check.success)
+            if(check.success){
+                alert(check.msg)
+            }else{
+                alert(check.msg)
+            }
+        })
+        console.log(e.target.parentNode.getAttribute("id"))
+      } else {
+        // Do nothing!
+      }
+    
 })

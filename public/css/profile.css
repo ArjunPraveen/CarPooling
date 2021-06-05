@@ -25,6 +25,9 @@
 body {
     background-color: #fcfcfc;
     font-family: 'Montserrat', sans-serif;
+    background: rgb(219,255,218);
+background: linear-gradient(90deg, rgba(219,255,218,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 47%, rgba(255,255,255,1) 71%, rgba(252,255,220,1) 100%);
+    /* background-image: url('https://cdn.dribbble.com/users/2318504/screenshots/13922669/media/d9c3482073015a10d6f0cabd8fdacffd.jpg?compress=1&resize=1600x1200'); */
   }
   
   #main,

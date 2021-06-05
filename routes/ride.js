@@ -7,7 +7,8 @@ exp.requestRide = async(req,res)=> {
         let {pickupPoint,
         destination,
         travelDate, 
-        modeOfTransport} = req.body
+        modeOfTransport,
+        numberOfPeople} = req.body
 
         //bookingDate=Date.now() 
         // convert date here
@@ -38,6 +39,7 @@ exp.requestRide = async(req,res)=> {
             rideInitiator : userID,
             travelDate,
             users,
+            numberOfPeople,
             modeOfTransport,
         })
         
@@ -69,20 +71,62 @@ exp.requestRide = async(req,res)=> {
 exp.joinExistingRide = async(req,res) => {
     try {
         const {rideID} = req.body
+        const userID = req.token['userID']
         const findRide = await Ride.findOne({rideID})
         if(!findRide){
-            return res.send({success:false, msg: 'Ride is not available or has already been confirmed!'})
+            return res.send({success:false, msg: 'Ride is not available or has already been deleted!'})
         }
-        await Ride.updateOne({rideID}, {$set: {}})
-
+        
+        const user = await User.findOne({userID})
+        if(user.rides.includes(rideID)){
+            return res.send({msg: `Youve already joined ride ${rideID}, check your profile`, success: false})
+        }
+        var rideupdate = await User.updateOne({userID}, {$push: {"rides" : rideID}})
+        if(rideupdate){
+            await Ride.updateOne({rideID}, {$push: {"users" : userID}})
+        }
+       
+        return res.send({success: true, msg:"Ride succesfully added"})
 
     } catch (err) {
-        
+        console.log(err)
+        return res.send({
+            success: false,
+            msg: 'Internal Server Error',
+        });
     }
 }
 
-exp.viewRides = async(req,res) => {
-    
+exp.viewRides = async(req,res,next) => {
+    try {
+        var allrides = await Ride.find({})
+        const rides = []
+        var users = {}
+        for(let i=0; i<allrides.length; i++){
+            temp = {}
+            if(req.token.userID == allrides[i].rideInitiator){
+                continue
+            }
+            if(allrides[i].rideInitiator in users){
+                allrides[i].initiatorName = user.rideInitiator
+            }else{
+                var curUser = await User.findOne({userID: allrides[i].rideInitiator})
+                users.rideInitiator = curUser.name
+                allrides[i].initiatorName = curUser.name
+            }
+            // allrides[i].travelDate = allrides[i].travelDate
+            rides.push(allrides[i])
+        };
+        
+        req.rides = rides
+        next()
+    } catch (err) {
+        console.log(err)
+        return res.send({
+            success: false,
+            msg: 'Internal Server Error',
+        });
+    }
 }
 
 exp.editRide = async(req,res) => {

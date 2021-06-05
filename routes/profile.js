@@ -38,7 +38,9 @@ exp.viewRides = async(req,res,next)=> {
             return res.send({success: false, msg:"User not found, Internal Server error"})
         }
         req.user = user
-        const allrides = await Ride.find({rideInitiator: req.token.userID})
+        const userID = req.token.userID
+        const allrides = await Ride.find({$or: [{rideInitiator: req.token.userID}, {users:userID}] })
+        console.log(allrides)
         const rides = []
         allrides.forEach((ride) => {
             rides.push(ride)

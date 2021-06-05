@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+      body {
+        background: rgb(219,255,218);
+background: linear-gradient(90deg, rgba(219,255,218,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 47%, rgba(255,255,255,1) 71%, rgba(252,255,220,1) 100%);
+    
+        font-family: 'Montserrat', sans-serif;
+    }
+    </style>
     <!-- <link rel="stylesheet" type="text/css" href="/css/profile.css" /> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
@@ -18,7 +27,7 @@
         <div class="row">
             <div id="tabsswitch" class = "col s12 l6 offset-l3">
                 <ul class = "tabs">
-                   <li class = "tab col s6"><a href = "#booked">Booked</a></li>
+                   <li class = "tab col s6"><a href = "#booked">Explore</a></li>
                    <li class = "tab col s6"><a class = "active" href ="#new">
                       New Form</a></li>
                    
@@ -39,12 +48,18 @@
                     <input id="destination" name="name" type="text" class="teal-text">
                     <label for="destination">Destination Location</label>
                     </div>
+
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix light-blue-text">group</i>
+                      <input id="numberOfPeople" name="name" type="number" class="teal-text">
+                      <label for="numberOfPeople">Number of People</label>
+                      </div>
                     <div class="divider"></div> 
                     <div class="col s12">&nbsp;</div>
                     
                       <div class="row">
                         <div class="col s12">
-                          <div class="col s4 teal-text">
+                          <div class="col s4 grey-text">
                             <div class="left">
                               <big><i class="material-icons small purple-text">directions_car</i></big>
                             </div>
@@ -66,14 +81,12 @@
                       </div>
 
                     <div class="input-field col s12">
+                      <i class="material-icons prefix light-blue-text">event</i>
                         <label for="traveldate" class="">Travel Date</label>
                         <input id="traveldate" type="text" class="datepicker black-text">
                     </div>
 
-                    <div class="input-field col s12">
-                        <label for="traveltime">Travel Time</label>
-                        <input id="traveltime" class="timepicker black-text" type="text">
-                    </div>
+                    
 
                     <div class="col s12">&nbsp;</div>
                     <div class="col s6 center">
@@ -86,43 +99,52 @@
 
             <div id= "booked" class="col s12 l6 offset-l3 white-text card hoverable">
                 <div class="col s12 center">
-                <h1 class="text-center teal-text light"><small>Materialize Form</small></h1>
+                <h1 class="text-center teal-text light"><small>Find your desired ride</small></h1>
                   </div>
                 <div class="divider"></div>  
-                <div class="input-field col s12">
-                  <i class="material-icons prefix teal-text">person</i>
-                  <input id="full-name" name="name" type="text" class="teal-text">
-                  <label for="full-name">Full Name</label>
-                </div>
-                <div class="input-field col s12">
-                  <i class="material-icons prefix teal-text">email</i>
-                  <input id="email" name="name" type="text" class="teal-text">
-                  <label for="email">Email</label>
-                </div>
+                
                 
                 <div class="row">
-                  <div class="col s12">
-                    <div class="col s4 teal-text gender">
-                      <div class="left">
-                        <big><i class="material-icons small">wc</i></big>
-                      </div>
-                      <duv class="left"> &nbsp; &nbsp; Gender</duv>
-                    </div>
-                    <div class="col s4 center">
-                      <input id="male" name="gender" checked="checked" class="with-gap" type="radio">
-                      <label for="male">Male</label>
-                    </div>
-                    <div class="col s4 center">
-                      <input id="female" name="gender" class="with-gap" type="radio">
-                      <label for="female">Female</label>
-                    </div>
+                  <div class="input-field col s12">
+                    <select>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                    <label>Materialize Select</label>
                   </div>
                 </div>
               
                 <div class="col s12 center">
-                <button type="Submit" class="col s12 btn red hoverable">Submit</button>
+                <button type="Submit" class="col s12 btn light-green hoverable">Filter</button>
                   </div>
                 <div class="col s12">&nbsp;</div>
+
+                <ul class="collection">
+                  <%for(let i=0; i<rides.length; i++){%>
+                    <%console.log(rides[0])%>
+                  <li class="collection-item avatar">
+                    <i class="material-icons circle">
+                      <div class="center-align">  <!--fix this-->
+                        <%if(rides[i].users.length>2){%>
+                          <i class="material-icons">groups</i>
+                        <%}else if(rides[i].users.length==2){%>
+                          <i class="material-icons">group</i>
+                        <%}else{%>
+                          <i class="material-icons">person</i>
+                        <%}%>
+                      </div>
+                    </i>
+                    <span class="title blue-text dark"><%=rides[i].initiatorName %></span>
+                    <!-- <p class="teal-text light"><%=rides[i].rideID %> <br></p> -->
+                    <p class="teal-text light"><%=rides[i].pickupPoint %> -> <%=rides[i].destination %> <br></p>
+                    <p class="purple-text light"><%=rides[i].travelDate.toDateString() %></p>  
+                    
+                    <a href="#!" name="addRide" id="<%=rides[i].rideID %>" class="secondary-content"><i class="material-icons">send</i></a>
+                  </li>
+                  <%}%>
+                </ul>
               </div>
         </div>
     </div>
