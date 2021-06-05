@@ -12,8 +12,8 @@ exp.requestRide = async(req,res)=> {
 
         //bookingDate=Date.now() 
         // convert date here
-            
-                
+        numberOfPeople = parseInt(numberOfPeople)
+        // return res.send({success: true, msg:typeof(numberOfPeople)})
         const userID = req.token['userID']
         const user = await User.findOne({userID: userID})
         if(!user){
@@ -52,7 +52,7 @@ exp.requestRide = async(req,res)=> {
         }
         return res.send({
             success: true,
-            msg: 'Registered event Successfully!',
+            msg: 'Ride added successfully!',
         });
     }catch(err){
         console.log(err)

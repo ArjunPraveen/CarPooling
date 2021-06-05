@@ -94,8 +94,9 @@
                           <%}%>
                           <div class="row">
                             <div class="col s6">
-                              <p class="collections-title"><%=rides[i].pickupPoint%></p>
+                              <p class="collections-title "><%=rides[i].pickupPoint%></p>
                               <p class="collections-content"><%=rides[i].destination%></p>
+                              <p class="collections-title"><%=rides[i].travelDate.toDateString()%></p>
                             </div>
                             <div class="col s3">
                               <span class="task-cat <%=colours[rides[i].modeOfTransport]%>"><%=rides[i].modeOfTransport%></span>
