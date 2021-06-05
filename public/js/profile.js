@@ -6,7 +6,7 @@ editButton.addEventListener('click', () =>  {
 });
 
 var editButton = document.getElementById("editButton")
-
+var logoutButton = document.getElementById("logout")
 
 editButton.addEventListener('click', async()=> {
     var name = document.getElementById('Name').value
@@ -36,3 +36,22 @@ editButton.addEventListener('click', async()=> {
         }
     })
 })
+
+// logoutButton.addEventListener('click', async()=> {
+//     await fetch('/api/logout', {
+//         method: 'GET',
+//         headers: {
+//             'Accept': 'application/json',
+//             "Content-Type": "application/json"
+//         },
+//         credentials: "include",
+        
+//     }).then((res) => {
+//         check = res.json()
+//         console.log(check)
+//         return check
+//     }).then((check)=>{
+//         console.log(check.success)
+        
+//     })
+// })

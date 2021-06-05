@@ -35,7 +35,8 @@
                           <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"><%=user.mobileNumber%></i></p>
                           <p><i class="mdi-communication-email cyan-text text-darken-2"><%=user.email%></i> </p>
                           <p>Total Rides: <i class="mdi-action-perm-identity cyan-text text-darken-4"><%=rides.length%></i></p>
-                          <a class="waves-effect waves-light btn" id="edit" href="#modal1">EDIT</a>
+                          <a class="orange waves-effect waves-light btn" id="edit" href="#modal1">EDIT</a>
+                          <a class="red waves-effect waves-light btn" id="logout" href="/api/logout">LOGOUT</a>
                         </div>
                         <!-- Modal Structure -->
                           <div id="modal1" class="modal modal-fixed-footer">
@@ -136,5 +137,5 @@
     
   
 </body>
-<script type="text/javascript" src="js/modal.js"></script>
+<script type="text/javascript" src="js/profile.js"></script>
 </html>
