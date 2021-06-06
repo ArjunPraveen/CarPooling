@@ -1,5 +1,5 @@
-# ITT-Project
-CarPooling
+# CarPooling - ITT-Project
+
 
 Make .env file and add this
 ```markdown
