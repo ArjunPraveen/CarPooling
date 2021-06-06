@@ -32,6 +32,7 @@ editButton.addEventListener('click', async()=> {
         console.log(check.success)
         if(check.success){
             alert(check.msg)
+            document.location.href = '/api/logout',true;
             //window.location = ("localhost:5000");
         }else{
             alert(check.msg)
