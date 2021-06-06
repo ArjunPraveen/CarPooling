@@ -8,13 +8,13 @@ const closeAlert = document.querySelector('.close-btn')
 signUpButton.addEventListener('click', () => {
 	container.classList.add("right-panel-active");
     //---
-    alerT.classList.add("show")
-    alerT.classList.remove("hide")
-    alerT.classList.add("showAlert")
-    setTimeout(()=>{
-        alerT.classList.remove("show")
-        alerT.classList.add("hide")
-    },5000)
+    // alerT.classList.add("show")
+    // alerT.classList.remove("hide")
+    // alerT.classList.add("showAlert")
+    // setTimeout(()=>{
+    //     alerT.classList.remove("show")
+    //     alerT.classList.add("hide")
+    // },5000)
 });
 
 

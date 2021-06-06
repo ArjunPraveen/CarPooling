@@ -160,8 +160,5 @@ exp.filterRide = async(req,res) => {
     res.render('newRide', {token : req.token, rides : rides})
 }
 
-exp.editRide = async(req,res) => {
-
-}
 
 module.exports = exp

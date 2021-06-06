@@ -28,12 +28,11 @@ router.post("/api/login", register.login)
 router.get("/api/logout", register.logout)
 
 //profile routes
-
-router.post('/api/newRide', auth, ride.requestRide)
 router.post('/api/editprofile', auth, profile.editProfile)
-// router.post('/api/fillform', auth, profile.fillForm)
+router.post('/api/deleteride', auth, profile.deleteRide)
 
 //ride routes
 router.post('/api/joinride', auth, ride.joinExistingRide)
+router.post('/api/newRide', auth, ride.requestRide)
 
 module.exports = router;

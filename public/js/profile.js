@@ -39,47 +39,36 @@ editButton.addEventListener('click', async()=> {
     })
 })
 
-// var viewButtons = document.querySelectorAll('a[href="#modal2"]')
+var deleteButtons = document.getElementsByClassName('red lighten-1 waves-effect waves-light btn-small')
+console.log(deleteButtons)
 
-// viewButtons.forEach(view => {
-//     console.log("hello")
-//     view.addEventListener('click', async()=> {
-//         console.log("hello")
-//         var elems = document.getElementById('modal2');
-//         var instances = M.Modal.init(elems,{dismissible: false});
-//         instances.open()
-//     })
-// })
+Array.from(deleteButtons).forEach(button => {
 
-// viewButtons.forEach(view => {
-//     console.log("hello")
-//     view.addEventListener('click', async()=> {
-        
-//         var elems = document.querySelectorAll('div[name="modal2"]');
-//         elems.forEach(elem => {
-//             var instances = M.Modal.init(elem,{dismissible: false});
-//             instances.open()
-//             console.log('uo')
-//         })
-        
-//     })
-// })
-
-// logoutButton.addEventListener('click', async()=> {
-//     await fetch('/api/logout', {
-//         method: 'GET',
-//         headers: {
-//             'Accept': 'application/json',
-//             "Content-Type": "application/json"
-//         },
-//         credentials: "include",
-        
-//     }).then((res) => {
-//         check = res.json()
-//         console.log(check)
-//         return check
-//     }).then((check)=>{
-//         console.log(check.success)
-        
-//     })
-// })
+    button.addEventListener('click', async(e)=>{
+        console.log(e.target.getAttribute('id'))
+        var rideID = e.target.getAttribute('id')
+        await fetch('/api/deleteride', {
+            method: 'POST' ,
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body : JSON.stringify({
+                rideID
+            })
+        }).then((res) => {
+            check = res.json()
+            console.log(check)
+            return check
+        }).then((check)=>{
+            console.log(check.success)
+            if(check.success){
+                alert(check.msg)
+                document.location.href = '/profile',true;
+            }else{
+                alert(check.msg)
+            }
+        })
+    })
+})

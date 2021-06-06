@@ -76,6 +76,35 @@ exp.viewRides = async(req,res,next)=> {
     
 }
 
+exp.deleteRide = async(req,res) => {
+    try {
+        const {rideID} = req.body
+        const userID = req.token.userID
+        const ride = await Ride.findOne({rideID})
+        console.log("hi", ride)
+        if(userID == ride.rideInitiator){
+            console.log(ride.users)
+            for(let i=0; i<ride.users.length; i++){
+                await User.updateOne({userID: ride.users[i]}, {$pull: {rides: rideID}})
+            }
+            //await Ride.updateOne({rideID}, {$pullAll: {users: ride.users}})\
+            await Ride.deleteOne({rideID})
+        }else{
+            await User.updateOne({userID}, {$pull: {rides: rideID}})
+            await Ride.updateOne({rideID}, {$pull: {users: userID}})
+        }
+        
+
+
+        return res.send({success: true, msg: "Deleted ride successfully!"})
+    } catch (err) {
+        console.log(err)
+        return res.send({
+            success:false,
+            msg:"Internal Server error"
+        })
+    }
+}
 
 
 module.exports = exp

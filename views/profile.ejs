@@ -97,7 +97,7 @@
                           <%var userDetails = JSON.stringify(rides[i].userDetails)%>
                           <%var places = `${rides[i].pickupPoint} -> ${rides[i].destination}`%>
                           <%var initiatorName = rides[i].userDetails.find(({userID}) => userID == rides[i].rideInitiator).name%>
-                          <%console.log(initiatorName)%>
+                          <!-- <%console.log(initiatorName)%> -->
                           <a style="color:inherit" href="#modal2" places="<%= places%>" userDetails="<%=userDetails%>" rideInitiator="<%=initiatorName%>" index="<%=i%>" id="<%=rides[i].rideInitiator%>">
                           <div class="row">
                             <div class="col s6">
@@ -109,7 +109,7 @@
                               <span class="task-cat <%=colours[rides[i].modeOfTransport]%>"><%=rides[i].modeOfTransport%></span>
                             </div>
                             <div class="col s3 right-align">
-                              <a class="red lighten-1 waves-effect waves-light btn-small" id="<%=rides[i].rideID%>"><i class="material-icons">delete</i></a>
+                              <a name="deleteButton" class="red lighten-1 waves-effect waves-light btn-small" id="<%=rides[i].rideID%>"><i class="material-icons">delete</i></a>
                               <!-- <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> -->
                               <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
                             </div>
@@ -179,9 +179,7 @@
   var viewButtons = document.querySelectorAll('a[href="#modal2"]')
 
 viewButtons.forEach(view => {
-    console.log("hello")
     view.addEventListener('click', ()=> {
-        console.log(view)
         var elems = document.getElementById('modal2');
         var instances = M.Modal.init(elems,{dismissible: false});
         var userID = '<%= user.userID %>'
