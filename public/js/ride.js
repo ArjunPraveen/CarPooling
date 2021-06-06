@@ -69,7 +69,7 @@ submit.addEventListener('click', async(e)=> {
 })
 
 var addRide = document.querySelectorAll('a[name="addRide"]')
-
+console.log(addRide)
 addRide.forEach(ride => {ride.addEventListener('click' , async(e)=> {
     const rideID = e.target.parentNode.getAttribute("id")
     if (confirm(`Are you sure you want to join ${rideID}? `)) {

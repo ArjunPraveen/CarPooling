@@ -42,9 +42,30 @@ exp.viewRides = async(req,res,next)=> {
         const allrides = await Ride.find({$or: [{rideInitiator: req.token.userID}, {users:userID}] })
         console.log(allrides)
         const rides = []
-        allrides.forEach((ride) => {
-            rides.push(ride)
-        });
+        var users = []
+        for(let i=0; i<allrides.length; i++){
+            
+            allrides[i].userDetails = []
+            for(let j=0; j<allrides[i].users.length; j++){
+                if (users.some(e => e.userID === allrides.users[j])) {
+                   allrides[i].userDetails.push(users.find(({userID}) => userID == allrides.users[j]))
+                }else{
+                    temp = {}
+                    var curUser =await User.findOne({userID : allrides[i].users[j] })
+                    temp = {
+                        userID: allrides[i].users[j],
+                        mobileNumber : curUser.mobileNumber,
+                        email : curUser.email,
+                        name: curUser.name
+                    }
+                    allrides[i].userDetails.push(temp)
+                }
+            }
+            
+            // allrides[i].travelDate = allrides[i].travelDate
+            rides.push(allrides[i])
+        }
+    
         //console.log(rides)
         req.rides = rides
         next()

@@ -86,12 +86,19 @@
                         <% var d = new Date()%>
                         <%if(rides.length!=0){%>
                         <% for(let i=0; i<rides.length; i++){ %>
-                        
+                          
                         <% if(rides[i].travelDate.getTime()<Date.now()){ %>
-                        <li class="collection-item grey lighten-4">
+                          
+                        <li class="collection-item grey lighten-4"  >
                           <%}else{%>
                             <li class="collection-item">
+                              
                           <%}%>
+                          <%var userDetails = JSON.stringify(rides[i].userDetails)%>
+                          <%var places = `${rides[i].pickupPoint} -> ${rides[i].destination}`%>
+                          <%var initiatorName = rides[i].userDetails.find(({userID}) => userID == rides[i].rideInitiator).name%>
+                          <%console.log(initiatorName)%>
+                          <a style="color:inherit" href="#modal2" places="<%= places%>" userDetails="<%=userDetails%>" rideInitiator="<%=initiatorName%>" index="<%=i%>" id="<%=rides[i].rideInitiator%>">
                           <div class="row">
                             <div class="col s6">
                               <p class="collections-title "><%=rides[i].pickupPoint%></p>
@@ -101,11 +108,15 @@
                             <div class="col s3">
                               <span class="task-cat <%=colours[rides[i].modeOfTransport]%>"><%=rides[i].modeOfTransport%></span>
                             </div>
-                            <div class="col s3">
+                            <div class="col s3 right-align">
+                              <a class="red lighten-1 waves-effect waves-light btn-small" id="<%=rides[i].rideID%>"><i class="material-icons">delete</i></a>
+                              <!-- <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> -->
                               <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
                             </div>
                           </div>
+                        </a>
                         </li>
+                      </a>
                         <%}%>
                         <%}else{%>
                           <li class="collection-item red  lighten-4">
@@ -119,16 +130,42 @@
                                 <div id="project-line-1"><canvas width="135" height="30" style="display: inline-block; width: 135px; height: 30px; vertical-align: top;"></canvas></div>
                               </div>
                             </div>
-                          </li>  
+                          </li> 
                           
                           <%}%>
                     </div>
-        
+                    <div id="modal2" class="modal bottom-sheet" style="max-height: fit-content;">
+                      <div class="modal-content">
+                        <h5 id="modaltitle"></h5>
+                        <div style="display:flex;">
+                          <p class="collection-item " >Ride Initiator: </p>
+                          <div>&nbsp;&nbsp;&nbsp;</div>
+                          <p class="collection-title" id="rideinitiator"></p>
+                       </div>
+                       
+                          <!-- <div class="col s4">
+                            <span></span>
+                            <p class="collection-item col s6 " >Ride Initiator: </p>
+                            <p class="collection-title col s6 " id="rideinitiator"></p>
+                          </div> -->
+                        
+                        <p class="collection-item left-align" >Possible Riders: </p>
+                        <p class="collection-item left-align" id="noridersfound"></p>
+                        <ol id="userlist">
+
+                        </ol>
+                        
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
                     <a class="btn-floating btn-large red" href="/newride">
-                      +
+                      <i class="material-icons">add</i>
                     </a>
                     
                   </div>
@@ -138,5 +175,48 @@
     
   
 </body>
+<script>
+  var viewButtons = document.querySelectorAll('a[href="#modal2"]')
+
+viewButtons.forEach(view => {
+    console.log("hello")
+    view.addEventListener('click', ()=> {
+        console.log(view)
+        var elems = document.getElementById('modal2');
+        var instances = M.Modal.init(elems,{dismissible: false});
+        var userID = '<%= user.userID %>'
+        instances.open()
+        //var userData = '<%- JSON.stringify(rides) %>'
+        var userData = view.getAttribute('userdetails')
+        var data = JSON.parse(userData)
+        document.getElementById('modaltitle').innerHTML = view.getAttribute('places')
+        document.getElementById("rideinitiator").innerHTML= view.getAttribute('rideInitiator')
+        var html = ""
+        for(let i=0; i<data.length && data.length>1; i++){
+          if(data[i].userID == userID){
+            continue
+          }
+          html += `<li><div style="display:flex;">
+            <p class="collection-item " >${data[i].name}</p>
+            <div>&nbsp;&nbsp;&nbsp;</div>
+            <p class="collection-title" >${data[i].mobileNumber}</p>
+            <div>&nbsp;&nbsp;&nbsp;</div>
+            <p class="collection-title" ">${data[i].email}</p>
+            </div>
+            </li>`
+            
+        }
+        if(html === "") {
+          document.getElementById("noridersfound").innerHTML = "No riders found yet!"
+          document.getElementById('userlist').innerHTML = ""
+        }else{
+          document.getElementById('userlist').innerHTML = html
+          document.getElementById("noridersfound").innerHTML = ""
+        }
+        
+        // console.log(userData)
+    })
+})
+</script>
 <script type="text/javascript" src="js/profile.js"></script>
 </html>
